@@ -5,13 +5,13 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
-@Table(name = "tb_user")
+@Entity // Indica que a classe é uma entidade de domínio que corresponderá à uma tabela
+@Table(name = "tb_user") // Altera o nome padrão do JPA que utiliza o nome da classe
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id // Indica o atirbuto que será a chave primária do banco de dados
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // indica que a chave primária correspondente será gerada autômaticamente pelo banco de dados
     private Long id;
     private String name;
     private String email;
