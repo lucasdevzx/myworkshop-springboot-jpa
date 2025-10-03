@@ -1,5 +1,6 @@
 package com.descompilando.projectF.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -20,7 +21,8 @@ public class User implements Serializable {
     private String phone;
     private String password;
 
-    @OneToMany(mappedBy = "client")
+    @JsonIgnore // Ignora o aninhamento de assosiação no JSON da requisição
+    @OneToMany(mappedBy = "client") // Define o relacionamento um para muitos, informa ao Hibernate que já existe uma coluna da outra mão que utiliza a chave primária atráves do atributo de  referencia
     private List<Order> orders = new ArrayList<>();
 
     public User() {

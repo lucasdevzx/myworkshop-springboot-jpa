@@ -1,23 +1,26 @@
 package com.descompilando.projectF.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
-@Entity
-@Table(name = "tb_order")
+@Entity // Transforma a classe em tabela atráves do Hibernate
+@Table(name = "tb_order") // Altera o nome da tabela
 public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT") // Define formato do atributo no JSON de um requisição
     private Instant moment;
 
-    @ManyToOne
-    @JoinColumn(name = "client_id")
+    @ManyToOne // Define relação muuitos pra um,cria coluna de chaves estrangeiras e preenche com a chave primária do atributo ID mapeado da mão inversa
+    @JoinColumn(name = "client_id") // Altera o nome da coluna criada da chave estrangeira
     private User client;
 
     public Order() {
