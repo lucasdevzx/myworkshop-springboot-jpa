@@ -9,11 +9,11 @@ import org.springframework.context.annotation.Profile;
 
 import java.util.Arrays;
 
-@Configuration
-@Profile("test")
-public class TestConfig implements CommandLineRunner {
+@Configuration // Sinaliza que a classe atual é uma classe de ocnfigurações
+@Profile("test") // Seleciona o perfil de testes para a classe
+public class TestConfig implements CommandLineRunner { // Implementa a interface de rastreio de métodos do framework em momento de execução
 
-    @Autowired
+    @Autowired // Injeção de dependência
     private UserRepository userRepository;
 
     @Override
