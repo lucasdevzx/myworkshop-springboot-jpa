@@ -21,6 +21,9 @@ public class Product implements Serializable {
     private String imgUrl;
 
 
+    @ManyToMany // Define a relação muitos para muitos e cira a tabela intermediária
+    // Altera nome da tabela, cria coluna e coluna inversa, altea seus nomes, cada FK das colunas aponta para seus respectivos PK
+    @JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "poduct_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
     public Product() {

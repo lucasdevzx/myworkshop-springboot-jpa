@@ -1,5 +1,6 @@
 package com.descompilando.projectF.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -17,6 +18,8 @@ public class Category implements Serializable {
     private Long id;
     private String name;
 
+    @JsonIgnore // Ignora o aninhamento de assosiação no JSON da requisição
+    @ManyToMany(mappedBy = "categories") // Define o relacionamento muitos para muitos, informa ao Hibernate que já existe uma coluna da outra mão que utiliza a chave primária atráves do atributo de coleção
     private Set<Product> products = new HashSet<>();
 
     public Category() {
