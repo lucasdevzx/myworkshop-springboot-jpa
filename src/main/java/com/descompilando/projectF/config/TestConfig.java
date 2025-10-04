@@ -1,8 +1,10 @@
 package com.descompilando.projectF.config;
 
+import com.descompilando.projectF.entities.Category;
 import com.descompilando.projectF.entities.Order;
 import com.descompilando.projectF.entities.User;
 import com.descompilando.projectF.entities.enums.OrderStatus;
+import com.descompilando.projectF.repositories.CategoryRepository;
 import com.descompilando.projectF.repositories.OrderRepository;
 import com.descompilando.projectF.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +25,15 @@ public class TestConfig implements CommandLineRunner { // Implementa a interface
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @Override
     public void run(String... args) throws Exception {
+
+        Category cat1 = new Category(null, "Electronics");
+        Category cat2 = new Category(null, "Books");
+        Category cat3 = new Category(null, "Computers");
 
         User u1 = new User(null, "Lucas Silva", "lucas@gmail.com", "22997895653", "2049");
         User u2 = new User(null, "Rafael Silva", "rafael@gmail.com", "229987721", "1620");
@@ -35,5 +44,6 @@ public class TestConfig implements CommandLineRunner { // Implementa a interface
 
         userRepository.saveAll(Arrays.asList(u1, u2));
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
+        categoryRepository.saveAll(Arrays.asList(cat1,cat2,cat3));
     }
 }
