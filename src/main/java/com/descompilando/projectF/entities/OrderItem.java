@@ -2,6 +2,7 @@ package com.descompilando.projectF.entities;
 
 import com.descompilando.projectF.pk.OrderItemPK;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -61,6 +62,11 @@ public class OrderItem implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    @JsonProperty("subtotal") // Pemrmite que o méthodo seja exibido em JSON sem utilizar a convenção de nome get
+    public Double SubTotal() {
+        return quantity * price;
     }
 
     @Override
