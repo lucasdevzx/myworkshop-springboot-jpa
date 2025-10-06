@@ -7,7 +7,9 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity // Transforma a classe em tabela atráves do Hibernate
 @Table(name = "tb_order") // Altera o nome da tabela
@@ -26,6 +28,9 @@ public class Order implements Serializable {
     @ManyToOne // Define relação muuitos pra um,cria coluna de chaves estrangeiras e preenche com a chave primária do atributo ID mapeado da mão inversa
     @JoinColumn(name = "client_id") // Altera o nome da coluna criada da chave estrangeira
     private User client;
+
+    @OneToMany(mappedBy = "id.order") // Define relação um para muitos com o OrderItem, sinali que já existe uma coluna utilizando sua chave estrangeira
+    private Set<OrderItem> items = new HashSet<>();
 
     public Order() {
     }
@@ -69,6 +74,10 @@ public class Order implements Serializable {
 
     public void setClient(User client) {
         this.client = client;
+    }
+
+    public Set<OrderItem> getItems() {
+        return items;
     }
 
     @Override
