@@ -54,6 +54,14 @@ public class UserService {
         }
     }
 
+    public User login(String email, String password) {
+        User user = userRepository.findByEmail(email);
+        if (user != null && user.getPassword().equals(password)) {
+            return user;
+        }
+        throw new ResourceNotFoundException("Invalid credentials");
+    }
+
     private void updateData(User entity, User obj) {
         entity.setName(obj.getName());
         entity.setEmail(obj.getEmail());
